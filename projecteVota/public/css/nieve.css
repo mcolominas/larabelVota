@@ -1,0 +1,25 @@
+.copo {
+    color: #76c0e9;
+    position: fixed;
+    display: inline-block;
+    z-index: 999;
+}
+.copo1 {
+    font-size: 1em;
+}
+.copo2 {
+    font-size: 1.2em;
+}
+.copo3 {
+    font-size: 1.25em;
+}
+.copo4 {
+    font-size: 1.5em;
+}
+div#ventisca{
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}

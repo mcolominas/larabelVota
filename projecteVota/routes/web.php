@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@getHome');
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -26,22 +24,12 @@ Route::get('/register', function () {
     return view('auth.register');
 });
 
-Route::get('/query', function () {
-    return view('query.index');
-});
+Route::get('/query', 'EncuestaController@getIndex');
 
-Route::get('/myQueries', function () {
-    return view('query.myQueries');
-});
+Route::get('/myQueries', 'EncuestaController@getMyQueries');
 
-Route::get('/query/vote/{id}', function ($id) {
-    return view('query.vote')->with('id', $id);
-})->where('id', '[0-9]+');
+Route::get('/query/vote/{id}', 'EncuestaController@getVote')->where('id', '[0-9]+');
 
-Route::get('/query/create', function () {
-    return view('query.create');
-});
+Route::get('/query/create', 'EncuestaController@getCreate');
 
-Route::get('/query/edit/{id}', function ($id) {
-    return view('query.edit')->with('id', $id);
-})->where('id', '[0-9]+');
+Route::get('/query/edit/{id}', 'EncuestaController@getEdit')->where('id', '[0-9]+');

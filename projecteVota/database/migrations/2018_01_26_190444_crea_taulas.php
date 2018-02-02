@@ -13,9 +13,9 @@ class CreaTaulas extends Migration
      */
     public function up()
     {   
-        Schema::create('encuesta', function (Blueprint $table) {
-            $table->increments('idEncuesta');
-            $table->integer('idUsuario');
+        Schema::create('encuestas', function (Blueprint $table) {
+            $table->increments('idEncuesta')->unsigned();
+            $table->integer('idUsuario')->unsigned();
             $table->string('nombre', 100);
             $table->boolean('multirespuesta')->default(false);
             $table->string('descripcion', 200)->nullable()->default(null);
@@ -25,59 +25,51 @@ class CreaTaulas extends Migration
 
             $table->index('idUsuario');
 
-            $table->integer('idUsuario')->unsigned();
             $table->foreign('idUsuario')->references('id')->on('users');
         });
 
-        Schema::create('accesoEncuesta', function (Blueprint $table) {
-            $table->increments('idAcceso');
-            $table->integer('idUsuario');
-            $table->integer('idEncuesta');
+        Schema::create('acceso_encuestas', function (Blueprint $table) {
+            $table->increments('idAcceso')->unsigned();
+            $table->integer('idUsuario')->unsigned();
+            $table->integer('idEncuesta')->unsigned();
             $table->timestamps();
 
             $table->index('idUsuario');
             $table->index('idEncuesta');
 
-            $table->integer('idUsuario')->unsigned();
             $table->foreign('idUsuario')->references('id')->on('users');
-
-            $table->integer('idEncuesta')->unsigned();
-            $table->foreign('idEncuesta')->references('idEncuesta')->on('encuesta');
+            $table->foreign('idEncuesta')->references('idEncuesta')->on('encuestas');
         });
 
-        Schema::create('opcionesEncuesta', function (Blueprint $table) {
-            $table->increments('idOpcion');
-            $table->integer('idEncuesta');
+        Schema::create('opciones_encuestas', function (Blueprint $table) {
+            $table->increments('idOpcion')->unsigned();
+            $table->integer('idEncuesta')->unsigned();
             $table->string('nombre', 100);
             $table->timestamps();
 
             $table->index('idEncuesta');
 
-            $table->integer('idEncuesta')->unsigned();
-            $table->foreign('idEncuesta')->references('idEncuesta')->on('encuesta');
+            $table->foreign('idEncuesta')->references('idEncuesta')->on('encuestas');
         });
         
-        Schema::create('permiso', function (Blueprint $table) {
-            $table->increments('idPermiso');
+        Schema::create('permisos', function (Blueprint $table) {
+            $table->increments('idPermiso')->unsigned();
             $table->string('nombre', 100);
             $table->string('descripcion', 200)->nullable()->default(null);
             $table->timestamps();
         });
 
-        Schema::create('votosEncuesta', function (Blueprint $table) {
-            $table->increments('idVoto');
-            $table->integer('idUsuario');
-            $table->integer('idOpcion');
+        Schema::create('votos_encuestas', function (Blueprint $table) {
+            $table->increments('idVoto')->unsigned();
+            $table->integer('idUsuario')->unsigned();
+            $table->integer('idOpcion')->unsigned();
             $table->timestamps();
 
             $table->index('idUsuario');
             $table->index('idOpcion');
 
-            $table->integer('idUsuario')->unsigned();
-            $table->foreign('idUsuario')->references('idUsuario')->on('accesoEncuesta');
-
-            $table->integer('idOpcion')->unsigned();
-            $table->foreign('idOpcion')->references('idOpcion')->on('opcionesEncuesta');
+            $table->foreign('idUsuario')->references('idUsuario')->on('acceso_encuestas');
+            $table->foreign('idOpcion')->references('idOpcion')->on('opciones_encuestas');
         });
     }
 
@@ -88,10 +80,10 @@ class CreaTaulas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('encuesta');
-        Schema::dropIfExists('accesoEncuesta');
-        Schema::dropIfExists('opcionesEncuesta');
-        Schema::dropIfExists('permiso');
-        Schema::dropIfExists('votosEncuesta');
+        Schema::dropIfExists('encuestas');
+        Schema::dropIfExists('accesoEncuestas');
+        Schema::dropIfExists('opcionesEncuestas');
+        Schema::dropIfExists('permisos');
+        Schema::dropIfExists('votosEncuestas');
     }
 }

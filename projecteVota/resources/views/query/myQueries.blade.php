@@ -1,5 +1,5 @@
 @section('title')
-	Projecte Vota - Inicio
+	Projecte Vota - Ver mis encuestas
 @stop
 
 @extends('layouts.master')
@@ -10,9 +10,9 @@
 	<div class="cardContent">
 
 	<ul class='noIconos'>
-	<li><a href='{{url("/query/edit/1")}}'>Mi encuesta 1</a></li>
-	<li><a href='{{url("/query/edit/2")}}'>Mi encuesta 2</a></li>
-	<li><a href='{{url("/query/edit/3")}}'>Mi encuesta 3</a></li>
+		@foreach ($encuestas as $encuesta)
+			<li><a href='{{url("/query/edit/$encuesta->idEncuesta")}}'>{{ $encuesta->nombre }}</a></li>
+		@endforeach
 	</ul>
 	</div>
 

@@ -1,5 +1,5 @@
 @section('title')
-	Projecte Vota - Inicio
+	Projecte Vota - Editar encuesta
 @stop
 
 @extends('layouts.master')
@@ -8,23 +8,27 @@
 
     <h2 class="cardTitle">Información sobre la encuesta</h2>
 	<div class="cardContent">
-		<h1>Encuesta 1</h1>
-		<h3>Descripcion</h3>
-				<table>
-					<tr>
-						<th colspan='3'>Numero total de votos: XXX</th>
-					</tr>
-					<tr>
-						<th>Respuesta</th>
-						<th>Cantidad de votos</th>
-						<th>Porcentaje de votos</th>
-					</tr>
-					<tr>
-						<td>XXX</td>
-						<td>XXX</td>
-						<td>XXX</td>
-					</tr>
-				</table>
+		<h1>{{ $encuesta->nombre }}</h1>
+		@if( $encuesta->descripcion !== null )
+			<h3>$encuesta->descripcion</h3>
+		@endif
+		<table>
+			<tr>
+				<th colspan='3'>Numero total de votos: {{ $cantVotosTotales }}</th>
+			</tr>
+			<tr>
+				<th>Respuesta</th>
+				<th>Cantidad de votos</th>
+				<th>Porcentaje de votos</th>
+			</tr>
+			@foreach ($opciones as $opcion)
+				<tr>
+					<td>{{ $opcion->nombre }}</td>
+					<td>{{ $cantVotosOpciones["$opcion->idOpcion"]["cantVotos"] }}</td>
+					<td>{{ $cantVotosOpciones["$opcion->idOpcion"]["porcentaje"] }}%</td>
+				</tr>
+			@endforeach
+		</table>
 	</div>
 	<h2 class="cardTitle">Invitar Usuarios</h2>
 	<div class="cardContent">
@@ -36,8 +40,15 @@
 	</div>
 	<h2 class="cardTitle">Usuarios Invitados</h2>
 	<div class="cardContent">
+		
 		<ul class="noIconos">
-			<li>Correo invitados</li>
+			@if( count($invitados) > 0 )
+				@foreach ($invitados as $invitado)
+					<li>{{ $invitado->idAcceso }}</li>
+				@endforeach
+			@else
+				<li>No has invitado a nadie.</li>
+			@endif
 		</ul>
 	</div>
 

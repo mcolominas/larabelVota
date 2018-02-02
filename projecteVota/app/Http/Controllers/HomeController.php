@@ -6,8 +6,27 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    function getHome(){
-    	//return redirect()->action('EncuestaConstroller@getIndex');
-    	return view('home');
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('home');
+    }
+
+    public function getHome(){
+        return redirect()->action('EncuestaController@getIndex');
     }
 }

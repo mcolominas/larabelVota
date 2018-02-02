@@ -38,9 +38,7 @@ function generarForumario(){
 	var elementoBotones = getElementoBotones();
 	var elementoRespuestas = getElementoRespuestas();
 
-	var elementoForm = document.createElement("form");
-	elementoForm.setAttribute("method", "post");
-	elementoForm.setAttribute("action", "../php/crearEncuesta.php");
+	var elementoForm = document.getElementsByTagName("form")[0];
 
 	agregarHijo(elementoForm, elementoFechaInicio);
 	agregarHijo(elementoForm, elementoFechaFin);
@@ -49,7 +47,6 @@ function generarForumario(){
 	agregarHijo(elementoForm, elementoMultirespuesta);
 	agregarHijo(elementoForm, elementoBotones);
 	agregarHijo(elementoForm, elementoRespuestas);
-	agregarHijo(this.parentNode, elementoForm);
 
 	elementoForm.addEventListener("submit", recalcularTiempo);
 

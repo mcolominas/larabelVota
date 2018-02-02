@@ -1,16 +1,23 @@
-@section('title')
-	Projecte Vota - Inicio
-@stop
-
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Dashboard</div>
 
-    <h2 class="cardTitle">Projecte Vota</h2>
-	<div class="cardContent">
-		<p>Bienvenidos a la pagina web del projecto vota aqui podras participar
-		en varias encuestas distintas y ayudar a la gente que requiere asistencia
-		para efectuar estadististicas.</p>
-	</div>
+                <div class="panel-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-@stop
+                    You are logged in!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

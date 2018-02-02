@@ -33,3 +33,9 @@ Route::get('/query/vote/{id}', 'EncuestaController@getVote')->where('id', '[0-9]
 Route::get('/query/create', 'EncuestaController@getCreate');
 
 Route::get('/query/edit/{id}', 'EncuestaController@getEdit')->where('id', '[0-9]+');
+
+Route::put('/query/create', 'EncuestaController@createEncuesta');
+
+
+Auth::routes();
+Route::get('/home', 'HomeController@getHome');
